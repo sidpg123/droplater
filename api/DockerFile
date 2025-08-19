@@ -1,0 +1,31 @@
+# Use official Node.js image
+FROM node:alpine AS builder
+
+# Set working directory
+WORKDIR /usr/src/app
+
+# Install dependencies first (better caching)
+COPY package*.json tsconfig.json ./
+RUN npm install
+
+# Copy source code
+COPY src ./src
+
+# Build TypeScript → JavaScript
+RUN npm run build
+
+# ---- Run stage ----
+FROM node:alpine
+
+WORKDIR /usr/src/app
+
+# Copy only built files + dependencies
+COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/dist ./dist
+COPY package*.json ./
+
+# Expose API port
+EXPOSE 3000
+
+# Run the app (compiled JS in dist)
+CMD ["node", "dist/app.js"]

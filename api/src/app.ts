@@ -7,6 +7,7 @@ import rateLimit from "express-rate-limit";
 import { corsOptions } from "./lib/utils";
 
 import notesRoute from './route/notes.route'
+import { connectDB } from "./config/db";
 
 const limiter = rateLimit({
     windowMs: 1000 * 60,
@@ -24,7 +25,10 @@ dotenv.config({
 
 const PORT = 5000;
 
+
+connectDB();
 const app = express();
+
 app.use(express.json());
 app.use(limiter);
 app.use(cors(corsOptions));
