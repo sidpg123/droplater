@@ -25,7 +25,7 @@ COPY --from=builder /usr/src/app/dist ./dist
 COPY package*.json ./
 
 # Expose API port
-EXPOSE 5000
+EXPOSE 5001
 
 # Run the app (compiled JS in dist)
 CMD ["node", "dist/app.js"]

@@ -28,4 +28,4 @@ COPY package*.json ./
 EXPOSE 5000
 
 # Run the app (compiled JS in dist)
-CMD ["node", "dist/app.js"]
+CMD ["node", "dist/index.js"]

@@ -1,0 +1,26 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "bullmq": "^5.58.0",
+    "dayjs": "^1.11.13",
+    "dotenv": "^17.2.1",
+    "ioredis": "^5.7.0",
+    "mongoose": "^8.17.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.4",
+    "zod": "^4.0.17"
+  }
+}

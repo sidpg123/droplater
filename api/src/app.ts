@@ -1,13 +1,12 @@
-import express from "express";
-import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import cors from "cors";
-import helmet from "helmet";
-import cookieParser from "cookie-parser"
+import express from "express";
 import rateLimit from "express-rate-limit";
+import helmet from "helmet";
 import { corsOptions } from "./lib/utils";
 
-import notesRoute from './route/notes.route'
 import { connectDB } from "./config/db";
+import notesRoute from './route/notes.route';
 
 const limiter = rateLimit({
     windowMs: 1000 * 60,
@@ -19,9 +18,7 @@ const limiter = rateLimit({
     standardHeaders: true,
 })
 
-dotenv.config({
-    path: '../.env'
-})
+
 
 const PORT = 5000;
 
