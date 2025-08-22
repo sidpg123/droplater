@@ -1,4 +1,4 @@
-import { createNote, getNotes } from '@/controllers/notes.controller';
+import { createNote, getNotes, retryJob } from '@/controllers/notes.controller';
 import express from 'express';
 
 
@@ -13,9 +13,9 @@ const app = express();
 //     })
 // })
 
-app.post('/notes', createNote )
-app.get('/notes', getNotes)
-
+app.post('/notes', createNote );
+app.get('/notes', getNotes);
+app.post('/notes/:id/replay', retryJob);
 
 
 export default app;
