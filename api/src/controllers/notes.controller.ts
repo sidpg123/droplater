@@ -27,7 +27,7 @@ const createNote = async (req: Request, res: Response) => {
             attempts: []
         })
 
-        const idempotemcyKey = generateIdempotencyKey(note._id.toString(), parsedData.releaseAt!);
+        const idempotencyKey = generateIdempotencyKey(note._id.toString(), parsedData.releaseAt!);
 
         const delay = Math.max(0, dayjs(releaseAt).diff(dayjs().utc(), "millisecond"));
         // console.log("delay in ms", delay);
@@ -39,7 +39,7 @@ const createNote = async (req: Request, res: Response) => {
             title: parsedData.title,
             body: parsedData.body,
             releaseAt: parsedData.releaseAt,
-            idempotemcyKey
+            idempotencyKey
         }, {
             delay
         })

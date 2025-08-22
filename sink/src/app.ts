@@ -19,8 +19,9 @@ app.use(cookieParser());
 
 
 app.post('/sink', async (req: Request, res) => {
-
+console.log("hitted");
     if (process.env.WEBHOOK === "OFF") {
+        console.log("server down")
         return res.status(500).json({
             success: "false",
             message: "Server down"
@@ -28,7 +29,7 @@ app.post('/sink', async (req: Request, res) => {
     }
 
     const idempotencyKey = req.header("X-Idempotency-Key");
-
+    console.log("idempotency key ", idempotencyKey)
     if (!idempotencyKey) {
         return res.status(400).json({ error: "Missing X-Idempotency-Key header" });
     }
@@ -40,6 +41,7 @@ app.post('/sink', async (req: Request, res) => {
 
         if (wasSet === 0) {
             // Already processed → duplicate
+            console.log("dupllicate sink, igonred");
             return res.status(200).json({ message: "Duplicate ignored" });
         }
 
